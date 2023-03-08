@@ -13,9 +13,16 @@
 <body class="bg-gray-100">
     <header class="p-5 border-b bg-white shadow">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-black">
-                Testagram
-            </h1>
+            @guest
+                <a class="text-3xl font-black" href="{{ route('login.index') }}">
+                    Testagram
+                </a> 
+            @endguest
+            @auth
+                <a class="text-3xl font-black" href="{{ route('post.index',auth()->user()->username) }}">
+                    Testagram
+                </a>
+            @endauth
                 @guest
                 <nav class="flex gap-2 items-center">
                     <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login.index') }}">Login</a>

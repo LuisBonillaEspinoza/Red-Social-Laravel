@@ -32,9 +32,9 @@ dropzone.on('success',function(file,response){
     document.querySelector('[name="imagen"]').value = response.imagen;
 });
 
-// dropzone.on('error',function(file,message){
-//     console.log(message);
-// });
+dropzone.on('error',function(file,message){
+    alert('No se puede subi');
+});
 
 dropzone.on('removedfile',function(){
     document.querySelector('[name="imagen"]').value = "";
