@@ -43,6 +43,9 @@ Route::post('/post/create',[PostController::class,'store'])->name('post.store');
 Route::post('/imagen',[ImagenController::class,'store'])->name('imagen.store');
 Route::get('/imagen/delete',[ImagenController::class,'delete']);
 
+//Mostrar Datos del Post
+Route::get('{user:username}/post/{post:slug}',[PostController::class,'show'])->name('post.show');
+
 
 
 

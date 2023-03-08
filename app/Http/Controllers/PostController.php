@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -52,8 +53,16 @@ class PostController extends Controller
             'descripcion' => $request['descripcion'],
             'imagen' => $request['imagen'],
             'user_id' => auth()->user()->id,
+            //Str::slug nos ayuda a hacer la url mas amigable
+            'slug' => Str::slug($request['titulo']),
         ]);
 
         return redirect()->route('post.index',auth()->user()->username);
+    }
+
+    public function show(User $user,Post $post){
+        return view('post.show',[
+            'posts' => $post
+        ]);
     }
 }
