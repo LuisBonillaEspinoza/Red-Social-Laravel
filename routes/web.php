@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -45,6 +46,9 @@ Route::get('/imagen/delete',[ImagenController::class,'delete']);
 
 //Mostrar Datos del Post
 Route::get('{user:username}/post/{post:slug}',[PostController::class,'show'])->name('post.show');
+
+//Comentarios
+Route::post('{user:username}/post/{post:slug}',[ComentarioController::class,'store'])->name('comentarios.store');
 
 
 
