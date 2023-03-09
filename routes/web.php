@@ -50,6 +50,9 @@ Route::get('{user:username}/post/{post:slug}',[PostController::class,'show'])->n
 //Comentarios
 Route::post('{user:username}/post/{post:slug}',[ComentarioController::class,'store'])->name('comentarios.store');
 
+//Eliminar Post
+Route::delete('{user:username}/post/{post:slug}',[PostController::class,'destroy'])->name('post.destroy');
+
 
 
 

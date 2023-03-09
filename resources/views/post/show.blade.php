@@ -21,6 +21,17 @@
                 <p class="mt-5">{{ $posts->descripcion }}</p>
             </div>
             
+            @auth
+            {{-- Saber si el usuario que hizo el post lo quiere borrar --}}
+                @if ($posts->user->id == auth()->user()->id)
+                    <form action="{{ route('post.destroy',['user' => $posts->user->username , 'post' => $posts]) }}" method="POST">
+                        @method('delete')
+                        @csrf
+                        <input type="submit" value="Eliminar Publicacion" class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4
+                        cursor-pointer">
+                    </form>
+                @endif
+            @endauth
         </div>
 
         <div class="md:w-1/2 p-5">

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -64,5 +66,32 @@ class PostController extends Controller
         return view('post.show',[
             'posts' => $post
         ]);
+    }
+
+    //Agregar esto al usar politicas
+    public function authorize($ability, $arguments = [])
+    {
+        return true;
+    }
+
+    public function destroy(User $user,Post $post){
+        // if($post->user->id == auth()->user()->id){
+        //     dd('Misma persona');
+        // }
+        // dd('No es la misma persona');
+
+        //Otra forma usnado Policy
+        $this->authorize('delete',$post);
+
+        $post->delete();
+
+        //Eliminado la imagen
+        $imagen_path = public_path('uploads/'.$post->imagen);
+
+        if(FacadesFile::exists($imagen_path)){
+            unlink($imagen_path);
+        }
+
+        return redirect()->route('post.index',['user' => $user]);
     }
 }
