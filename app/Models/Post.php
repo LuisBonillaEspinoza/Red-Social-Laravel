@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Comentario;
+use App\Models\Like;
 class Post extends Model
 {
     use HasFactory;
@@ -18,5 +19,14 @@ class Post extends Model
 
     public function comentarios(){
         return $this->hasMany(Comentario::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    //Verificar si dio like
+    public function checkLikes(User $user){
+        return $this->likes->contains('user_id',$user->id);
     }
 }
