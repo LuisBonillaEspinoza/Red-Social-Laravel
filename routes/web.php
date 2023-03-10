@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +59,15 @@ Route::delete('{user:username}/post/{post:slug}',[PostController::class,'destroy
 //Likes
 Route::post('/post/{post}',[LikeController::class,'store'])->name('like.store');
 Route::delete('/post/{post}',[LikeController::class,'destroy'])->name('like.delete');
+
+//Perfil
+Route::get('/{user:username}/editar-perfil',[PerfilController::class,'index'])->name('perfil.index');
+Route::post('/{user:username}/editar-perfil',[PerfilController::class,'store'])->name('perfil.store');
+
+//Seguir a usuarios
+Route::post('/{user:username}/follow',[FollowerController::class,'store'])->name('follow.store');
+Route::delete('/{user:username}/unfollow',[FollowerController::class,'destroy'])->name('follow.unfollow');
+
 
 
 
