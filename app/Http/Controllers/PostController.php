@@ -23,7 +23,7 @@ class PostController extends Controller
         // $posts = Post::where('user_id',$user->id)->get();
 
         //Con Paginado de 3
-        $posts = Post::where('user_id',$user->id)->paginate(3);
+        $posts = Post::where('user_id',$user->id)->latest()->paginate(3);
 
         return view('dashboard',[
             'user' => $user,

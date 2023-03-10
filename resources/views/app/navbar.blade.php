@@ -19,7 +19,7 @@
                 </a> 
             @endguest
             @auth
-                <a class="text-3xl font-black" href="{{ route('post.index',auth()->user()->username) }}">
+                <a class="text-3xl font-black" href="{{ route('home.index') }}">
                     Testagram
                 </a>
             @endauth
@@ -40,7 +40,7 @@
                         Crear
                     </a>
 
-                    <a class="font-bold text-gray-600 text-sm" href="">Hola : 
+                    <a class="font-bold text-gray-600 text-sm" href="{{ route('post.index',['user' => auth()->user()]) }}">Hola : 
                         <span class="font-normal">{{ auth()->user()->username }}</span>
                     </a>
 
